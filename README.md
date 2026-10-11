@@ -30,11 +30,13 @@ The first spreadsheet row must contain headings, and every subsequent row must r
 
 If you include, say, `OUT` as one of the hospital options for trainees who will be out of programme for the year, then it is treated as a hospital by the matcher, so give it enough places in the director setup to accommodate those trainees.
 
+A sample spreadsheet is included in this repository as the file "test-rankings.xslx".
+
 ## What the program does
 
 TPD matcher assigns trainees (doctors) to hospitals from their ranked choices. It uses a doctor-proposing, capacity-constrained matching process based on the Gale–Shapley matching algorithm ([Wikipedia](https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm)).
 
-In tge softawre, the TPD selects a ranking spreadsheet, supplies each hospital's number of full-time places and jobshare policy, and can pre-allocate particular trainees. The program produces an assignment spreadsheet with one column per hospital.
+In the software, the TPD selects a ranking spreadsheet, supplies each hospital's number of full-time places and jobshare policy, and can pre-allocate particular trainees. The program produces an assignment spreadsheet with one column per hospital.
 
 - A full-time trainee uses one full-time place.
 - At a hospital where **Allows Jobshares** is set to Yes, each part-time trainee uses half a place; two part-time trainees therefore share one full-time job.
