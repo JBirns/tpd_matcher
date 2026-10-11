@@ -2,37 +2,39 @@
 
 ## Quick-start for Windows
 
-No Python, Tkinter, or terminal is needed to use the pre-built Windows application.
+Follow these instructions for the pre-built Windows application.
 
-1. Download [tpd_matcher_windows.zip](tpd_matcher_windows.zip) from this project's main directory.
+1. Download [tpd_matcher_windows.zip](tpd_matcher_windows.zip) from this project's main directory (click on the link here and then "Download" from the three dots on the top right).
 2. Extract the entire ZIP file. Do not extract only `TPDMatcher.exe`; it needs the accompanying `_internal` folder.
 3. Open `dist\TPDMatcher\TPDMatcher.exe` from the extracted files.
 4. Follow the on-screen instructions: select the ranking spreadsheet, enter hospital settings and any pre-allocations, then choose where to save the result as CSV or XLSX.
 
-Windows may show a SmartScreen warning for this unsigned, privately distributed executable. This is a Windows trust warning, not a missing dependency.
+Windows may show a SmartScreen warning for this unsigned, privately distributed executable. This is a Windows trust warning, not a missing dependency; you may continue beyond this, e.g. by pressing "more info".
+
+There are pop-ups/help buttons which explain details for use as needed.
 
 ## Data collection and ranking spreadsheet
 
-The input spreadsheet is designed to mirror the response sheet created by a Google Form. Set up the form questions in this order:
+The input spreadsheet is designed to mirror the response sheet created by a Google Form. If you wish to use a Google form, set up the form questions in this order (otherwise you will need to input them in a spreadsheet manually):
 
 | Google Form question | Spreadsheet column | Required contents |
 | --- | --- | --- |
 | Automatic Google Forms timestamp | A | ignored by the matcher |
 | Q1: email | B | ignored by the matcher |
 | Q2: name | C | trainee name; must be unique |
-| Q3: part-time/full-time dropdown | D | `full-time` or `part-time` (FT/PT are also accepted) |
-| Q4: other information | E | free text for the TPD; ignored by the matching algorithm |
-| Q5 onwards: hospital dropdowns | F onwards | hospital choices in descending preference order |
+| Q3: part-time/full-time dropdown | D | `full-time` or `part-time`|
+| Q4: other information | E | free text for the TPD (e.g. extenuating circumstances, something the trainee thinks the TPD should know, etc.); ignored by the matching algorithm |
+| Q5 onwards: hospital dropdowns | F onwards | hospital choices in descending preference order, make sure to add a "hospital" option for trainees who will be out of programme for the year |
 
 The first spreadsheet row must contain headings, and every subsequent row must represent a different trainee. The spreadsheet may be saved as `.csv` or `.xlsx`.
 
-Include `OUT` as one of the hospital options for trainees who will be out of programme for the year. It is treated as a hospital by the matcher, so give it enough places in the director setup to accommodate those trainees.
+If you include, say, `OUT` as one of the hospital options for trainees who will be out of programme for the year, then it is treated as a hospital by the matcher, so give it enough places in the director setup to accommodate those trainees.
 
 ## What the program does
 
-TPD matcher assigns trainees (doctors) to hospitals from their ranked choices. It uses a doctor-proposing, capacity-constrained matching process based on Gale–Shapley.
+TPD matcher assigns trainees (doctors) to hospitals from their ranked choices. It uses a doctor-proposing, capacity-constrained matching process based on the Gale–Shapley matching algorithm ([Wikipedia](https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm)).
 
-The director selects a ranking spreadsheet, supplies each hospital's number of full-time places and jobshare policy, and can pre-allocate particular trainees. The program produces an assignment spreadsheet with one column per hospital.
+In tge softawre, the TPD selects a ranking spreadsheet, supplies each hospital's number of full-time places and jobshare policy, and can pre-allocate particular trainees. The program produces an assignment spreadsheet with one column per hospital.
 
 - A full-time trainee uses one full-time place.
 - At a hospital where **Allows Jobshares** is set to Yes, each part-time trainee uses half a place; two part-time trainees therefore share one full-time job.
@@ -43,7 +45,7 @@ The director selects a ranking spreadsheet, supplies each hospital's number of f
 
 ## Build from source
 
-Build each platform on that platform. The resulting application is self-contained for its recipients.
+If instead of using the prepackaged version, you wish to build the program from source, then follow the instructions below. There is support for Windows and Linux.
 
 ### Linux
 
