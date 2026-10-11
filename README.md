@@ -1,6 +1,34 @@
 # TPD matcher
 
-## A. What the program does
+## Quick-start for Windows
+
+No Python, Tkinter, or terminal is needed to use the pre-built Windows application.
+
+1. Download [tpd_matcher_windows.zip](tpd_matcher_windows.zip) from this project's main directory.
+2. Extract the entire ZIP file. Do not extract only `TPDMatcher.exe`; it needs the accompanying `_internal` folder.
+3. Open `dist\TPDMatcher\TPDMatcher.exe` from the extracted files.
+4. Follow the on-screen instructions: select the ranking spreadsheet, enter hospital settings and any pre-allocations, then choose where to save the result as CSV or XLSX.
+
+Windows may show a SmartScreen warning for this unsigned, privately distributed executable. This is a Windows trust warning, not a missing dependency.
+
+## Data collection and ranking spreadsheet
+
+The input spreadsheet is designed to mirror the response sheet created by a Google Form. Set up the form questions in this order:
+
+| Google Form question | Spreadsheet column | Required contents |
+| --- | --- | --- |
+| Automatic Google Forms timestamp | A | ignored by the matcher |
+| Q1: email | B | ignored by the matcher |
+| Q2: name | C | trainee name; must be unique |
+| Q3: part-time/full-time dropdown | D | `full-time` or `part-time` (FT/PT are also accepted) |
+| Q4: other information | E | free text for the TPD; ignored by the matching algorithm |
+| Q5 onwards: hospital dropdowns | F onwards | hospital choices in descending preference order |
+
+The first spreadsheet row must contain headings, and every subsequent row must represent a different trainee. The spreadsheet may be saved as `.csv` or `.xlsx`.
+
+Include `OUT` as one of the hospital options for trainees who will be out of programme for the year. It is treated as a hospital by the matcher, so give it enough places in the director setup to accommodate those trainees.
+
+## What the program does
 
 TPD matcher assigns trainees (doctors) to hospitals from their ranked choices. It uses a doctor-proposing, capacity-constrained matching process based on Gale–Shapley.
 
@@ -13,30 +41,7 @@ The director selects a ranking spreadsheet, supplies each hospital's number of f
 - If a trainee cannot receive any ranked hospital, the result can still be saved with that trainee in an `UNALLOCATED` column.
 - The supplied data has no hospital preference ranking. When places are contested, spreadsheet row order is the deterministic tie-break.
 
-### Ranking spreadsheet format
-
-Input may be a `.csv` or `.xlsx` spreadsheet. The first row should contain headings; every later row represents one trainee.
-
-| Column | Contents |
-| --- | --- |
-| A, B | ignored |
-| C | trainee name; must be unique |
-| D | `full-time` or `part-time` (FT/PT are also accepted) |
-| E | ignored notes/free text |
-| F onward | hospitals in preference order |
-
-## B. Run the Windows application
-
-No Python, Tkinter, or terminal is needed to use the pre-built Windows application.
-
-1. Download [tpd_matcher_windows.zip](tpd_matcher_windows.zip) from this project's main directory.
-2. Extract the entire ZIP file. Do not extract only `TPDMatcher.exe`; it needs the accompanying `_internal` folder.
-3. Open `dist\TPDMatcher\TPDMatcher.exe` from the extracted files.
-4. Follow the on-screen instructions: select the ranking spreadsheet, enter hospital settings and any pre-allocations, then choose where to save the result as CSV or XLSX.
-
-Windows may show a SmartScreen warning for this unsigned, privately distributed executable. This is a Windows trust warning, not a missing dependency.
-
-## C. Build from source
+## Build from source
 
 Build each platform on that platform. The resulting application is self-contained for its recipients.
 
@@ -73,7 +78,7 @@ Copy the entire project folder to a Windows machine: the builder needs `matcher.
 
 Distribute that complete `TPDMatcher` folder. Recipients double-click `TPDMatcher.exe` and need no other setup.
 
-## D. Run from the command line
+## Run from the command line
 
 Install the spreadsheet dependency once:
 
